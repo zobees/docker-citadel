@@ -11,12 +11,13 @@ ENV STEAM_APP_ID="489650" \
 
 COPY files/server.sh /server.sh
 
+RUN useradd -ms /bin/bash citadel
+
 RUN mkdir -p $CITADEL_DIR && \
     chmod 755 /server.sh && \
+    chown -R citadel:citadel /home/steam && \
     chmod +x /home/steam/Steam/steamcmd.sh && \
     chmod +x /home/steam/Steam/linux32/steamcmd
-
-RUN useradd -ms /bin/bash citadel
 
 WORKDIR $CITADEL_DIR
 
